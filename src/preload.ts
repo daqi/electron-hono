@@ -4,7 +4,7 @@ import { contextBridge, ipcRenderer } from "electron";
 import type { FetchReturnValue } from "./fetch";
 
 contextBridge.exposeInMainWorld("electron", {
-    fetch: async (input: string, requestInit: { method?: string; body?: unknown }) => {
+    fetch: async (input: string, requestInit: RequestInit) => {
         const res = (await ipcRenderer.invoke("fetch", input, requestInit)) as FetchReturnValue;
         const { status, statusText, bodyUsed, ok, redirected, type, url, body } = res;
         const json = () => {

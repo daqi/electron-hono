@@ -2,7 +2,7 @@
     "name": "electron-hono",
     "productName": "electron-hono",
     "version": "1.0.0",
-    "description": "My Electron application description",
+    "description": "Electron Hono Drizzle Zod",
     "main": ".vite/build/main.js",
     "scripts": {
         "start": "electron-forge start",
@@ -10,6 +10,8 @@
         "make": "electron-forge make",
         "publish": "electron-forge publish",
         "lint": "biome check --apply --files-ignore-unknown=true *.ts src",
+        "migrate": "ts-node ./migrate.ts",
+        "generate": "yarn drizzle-kit generate:sqlite",
         "postinstall": "simple-git-hooks"
     },
     "devDependencies": {
@@ -24,6 +26,7 @@
         "@electron-forge/plugin-vite": "^7.4.0",
         "@electron/fuses": "^1.8.0",
         "@vitejs/plugin-vue": "^5.0.4",
+        "drizzle-kit": "^0.20.14",
         "electron": "30.0.0",
         "lint-staged": "^15.2.2",
         "simple-git-hooks": "^2.11.1",
@@ -31,13 +34,19 @@
         "typescript": "~4.5.4",
         "vite": "^5.0.12"
     },
-    "keywords": [],
-    "author": "Administrator",
+    "keywords": ["Electron", "Hono", "Drizzle", "Zod", "better-sqlite3"],
+    "author": "Daqi",
     "license": "MIT",
     "dependencies": {
+        "@hono/zod-validator": "^0.2.1",
+        "@types/better-sqlite3": "^7.6.9",
+        "better-sqlite3": "^9.5.0",
+        "drizzle-orm": "^0.30.8",
+        "drizzle-zod": "^0.5.1",
         "electron-squirrel-startup": "^1.0.0",
         "hono": "^4.2.4",
-        "vue": "^3.4.22"
+        "vue": "^3.4.22",
+        "zod": "^3.22.4"
     },
     "simple-git-hooks": {
         "pre-commit": "yarn lint-staged"
