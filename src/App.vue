@@ -1,16 +1,13 @@
 <template>
-    <h1>💖 Hello World!</h1>
-    <p>Welcome to your Electron application.</p>
+  <h1>💖 Hello World!</h1>
+  <p>Welcome to your Electron application.</p>
 </template>
 
-<script setup>
+<script setup lang="ts">
 console.log('👋 This message is being logged by "App.vue", included via Vite');
-electron.fetch({
-    method: 'GET',
-    url: '/'
-}).then(console.log)
-electron.fetch({
-    method: 'POST',
-    url: '/'
-}).then(console.log)
+
+const fetch = window.electron.fetch || window.fetch;
+fetch("/", { method: "POST", body: JSON.stringify({ name: "John" }) })
+    .then((e) => e.json())
+    .then(console.log);
 </script>
