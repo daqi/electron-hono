@@ -12,7 +12,7 @@ export type FetchReturnValue = {
     body: string;
 };
 
-const handleFetch = (app: Hono) => {
+const handleFetch = (app: Hono<any>) => {
     ipcMain.handle("fetch", async (e, input: string, requestInit: RequestInit) => {
         console.log("fetch", input, requestInit);
         const response = await app.request(input, requestInit);
