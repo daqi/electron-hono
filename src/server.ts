@@ -17,11 +17,11 @@ app.get("/users", async (c) => {
     const data = c.var.db.select().from(users).all();
     return c.json({ data });
 }).post("/users", zValidator("json", createInsertSchema(users, { id: z.undefined() })), async (c) => {
-    const data = c.req.valid("json");
+    const data: NewUser = c.req.valid("json");
     data.updateAt = new Date();
     const res = await c.var.db
         .insert(users)
-        .values(data as NewUser)
+        .values(data)
         .execute();
     return c.json({ data: res });
 });
@@ -30,11 +30,11 @@ app.get("/posts", async (c) => {
     const data = c.var.db.select().from(posts).all();
     return c.json({ data });
 }).post("/posts", zValidator("json", createInsertSchema(posts, { id: z.undefined() })), async (c) => {
-    const data = c.req.valid("json");
+    const data = c.req.valid("json") as unknown as NewPost;
     data.updateAt = new Date();
     const res = await c.var.db
         .insert(posts)
-        .values(data as NewPost)
+        .values(data)
         .execute();
     return c.json({ data: res });
 });
